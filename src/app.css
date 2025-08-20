@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* daisyUI plugin for Tailwind v4 */
+@plugin "daisyui";
+
+/* Global styles */
+:root {
+  font-family: Lato, Avenir, system-ui, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: "Lato", sans-serif;
+}

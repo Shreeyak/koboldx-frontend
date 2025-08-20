@@ -1,0 +1,46 @@
+{
+  // Svelte + Vite dashboard tasks for VS Code
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "run server",
+      "type": "shell",
+      "command": "npm run dev",
+      "group": "build",
+      "detail": "Start Vite dev server for Svelte dashboard",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "npm run build",
+      "group": "build",
+      "detail": "Build production bundle",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Preview",
+      "type": "shell",
+      "command": "npm run preview",
+      "group": "test",
+      "detail": "Preview production build locally",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Install dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "group": "none",
+      "detail": "Install project dependencies",
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}
