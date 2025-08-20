@@ -78,6 +78,10 @@
 
   // Group intervals by type for better layout
   const groupedIntervals = $derived(() => {
+    if (!intervals || intervals.length === 0) {
+      return { intraday: [], daily: [] };
+    }
+
     const intraday = intervals.filter((i) => i.includes("m") || i === "1h");
     const daily = intervals.filter((i) => i.includes("d") || i.includes("w") || i.includes("M"));
 
@@ -87,10 +91,10 @@
 
 <div class="flex flex-col gap-2">
   <!-- Intraday intervals -->
-  {#if groupedIntervals.intraday.length > 0}
+  {#if groupedIntervals && groupedIntervals.intraday && groupedIntervals.intraday.length > 0}
     <div class="flex flex-wrap gap-1">
       <span class="text-xs text-base-content/70 self-center mr-2">Intraday:</span>
-      {#each groupedIntervals.intraday as interval}
+      {#each groupedIntervals?.intraday ?? [] as interval}
         <button
           class={getButtonClass(interval)}
           onclick={() => {
@@ -123,10 +127,10 @@
   {/if}
 
   <!-- Daily/Weekly intervals -->
-  {#if groupedIntervals.daily.length > 0}
+  {#if groupedIntervals?.daily?.length > 0}
     <div class="flex flex-wrap gap-1">
       <span class="text-xs text-base-content/70 self-center mr-2">Daily:</span>
-      {#each groupedIntervals.daily as interval}
+      {#each groupedIntervals?.daily ?? [] as interval}
         <button
           class={getButtonClass(interval)}
           onclick={() => {
@@ -159,9 +163,9 @@
   {/if}
 
   <!-- Simple layout fallback -->
-  {#if groupedIntervals.intraday.length === 0 && groupedIntervals.daily.length === 0}
+  {#if (groupedIntervals?.intraday?.length ?? 0) === 0 && (groupedIntervals?.daily?.length ?? 0) === 0}
     <div class="flex flex-wrap gap-1">
-      {#each intervals as interval}
+      {#each intervals ?? [] as interval}
         <button
           class={getButtonClass(interval)}
           onclick={() => {
