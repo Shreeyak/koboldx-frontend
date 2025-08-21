@@ -77,7 +77,7 @@
   };
 
   // Group intervals by type for better layout
-  const groupedIntervals = $derived(() => {
+  const groupedIntervals = $derived.by(() => {
     if (!intervals || intervals.length === 0) {
       return { intraday: [], daily: [] };
     }

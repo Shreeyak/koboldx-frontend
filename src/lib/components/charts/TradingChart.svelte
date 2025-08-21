@@ -34,8 +34,8 @@
           chart.remove();
         }
 
-        chart = createChart(chartContainer, {
-          width: chartContainer.clientWidth,
+        chart = createChart(chartContainer!, {
+          width: chartContainer!.clientWidth,
           height: height,
           layout: {
             background: { color: "transparent", type: ColorType.Solid },
@@ -72,7 +72,6 @@
           },
           timeScale: {
             borderColor: "#374151",
-            textColor: "#d1d5db",
             timeVisible: true,
             secondsVisible: false,
           },
@@ -115,7 +114,7 @@
         };
 
         const resizeObserver = new ResizeObserver(resizeChart);
-        resizeObserver.observe(chartContainer);
+        resizeObserver.observe(chartContainer!);
 
         return () => {
           resizeObserver.disconnect();

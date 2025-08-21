@@ -21,6 +21,30 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
+/* Custom component styles using @apply */
+.card {
+	@apply bg-base-100 shadow-sm;
+}
+
+.card-title {
+	@apply font-semibold text-base-content;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+	.btm-nav {
+		@apply flex justify-center gap-4;
+	}
+}
+
+/* Smooth transitions for sidebar toggles */
+.transition-all {
+	transition:
+		width 0.3s ease-in-out,
+		opacity 0.3s ease-in-out;
 }
 
 body {

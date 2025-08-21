@@ -354,7 +354,11 @@
                     Close
                   </button>
                 {/if}
-                <button class="btn btn-xs btn-ghost" onclick={() => toggleExpand(trade.id)}>
+                <button
+                  class="btn btn-xs btn-ghost"
+                  onclick={() => toggleExpand(trade.id)}
+                  aria-label="Toggle details for trade"
+                >
                   <svg
                     class="w-3 h-3 transition-transform"
                     class:rotate-180={expandedTrades.has(trade.id)}

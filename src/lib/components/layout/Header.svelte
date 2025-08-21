@@ -73,7 +73,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
           <li><button onclick={onToggleLeftSidebar}>Instruments</button></li>
           <li><button onclick={onToggleRightSidebar}>Charts</button></li>
         </ul>
@@ -85,6 +85,7 @@
         onclick={onToggleLeftSidebar}
         class:btn-active={leftSidebarOpen}
         title="Toggle instruments panel"
+        aria-label="Toggle instruments panel"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -153,6 +154,7 @@
         onclick={onToggleRightSidebar}
         class:btn-active={rightSidebarOpen}
         title="Toggle charts panel"
+        aria-label="Toggle charts panel"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -178,7 +180,7 @@
             ></path>
           </svg>
         </div>
-        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+        <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
           <li><a href="#settings">Settings</a></li>
           <li><a href="#theme">Theme</a></li>
           <li><a href="#help">Help</a></li>

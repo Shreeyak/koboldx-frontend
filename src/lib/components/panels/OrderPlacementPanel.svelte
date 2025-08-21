@@ -101,7 +101,7 @@
   };
 
   // Calculate order value
-  let orderValue = $derived(() => {
+  let orderValue = $derived.by(() => {
     const effectivePrice = orderType === "MARKET" ? (side === "BUY" ? askPrice : bidPrice) : price || currentPrice;
     return quantity * effectivePrice;
   });
@@ -158,29 +158,29 @@
   <form onsubmit={placeOrder} class="space-y-3">
     <!-- Symbol (read-only for now) -->
     <div class="form-control">
-      <label class="label py-1">
+      <label class="label py-1" for="symbol-input">
         <span class="label-text text-xs font-medium">Symbol</span>
       </label>
-      <input type="text" class="input input-bordered input-sm bg-base-200" value={selectedSymbol} readonly />
+      <input id="symbol-input" type="text" class="input input-bordered input-sm bg-base-200" value={selectedSymbol} readonly />
     </div>
 
     <!-- Side and Order Type -->
     <div class="grid grid-cols-2 gap-2">
       <div class="form-control">
-        <label class="label py-1">
+        <label class="label py-1" for="side-select">
           <span class="label-text text-xs font-medium">Side</span>
         </label>
-        <select class="select select-bordered select-sm" bind:value={side}>
+        <select id="side-select" class="select select-bordered select-sm" bind:value={side}>
           <option value="BUY">BUY</option>
           <option value="SELL">SELL</option>
         </select>
       </div>
 
       <div class="form-control">
-        <label class="label py-1">
+        <label class="label py-1" for="order-type-select">
           <span class="label-text text-xs font-medium">Type</span>
         </label>
-        <select class="select select-bordered select-sm" bind:value={orderType}>
+        <select id="order-type-select" class="select select-bordered select-sm" bind:value={orderType}>
           <option value="MARKET">MARKET</option>
           <option value="LIMIT">LIMIT</option>
           <option value="SL">SL</option>
@@ -191,10 +191,11 @@
 
     <!-- Quantity -->
     <div class="form-control">
-      <label class="label py-1">
+      <label class="label py-1" for="quantity-input">
         <span class="label-text text-xs font-medium">Quantity</span>
       </label>
       <input
+        id="quantity-input"
         type="number"
         class="input input-bordered input-sm"
         bind:value={quantity}
@@ -240,10 +241,11 @@
     <!-- Trigger Price (conditional) -->
     {#if showTriggerPrice}
       <div class="form-control">
-        <label class="label py-1">
+        <label class="label py-1" for="trigger-price-input">
           <span class="label-text text-xs font-medium">Trigger Price</span>
         </label>
         <input
+          id="trigger-price-input"
           type="number"
           class="input input-bordered input-sm"
           bind:value={triggerPrice}
@@ -256,10 +258,10 @@
 
     <!-- Product -->
     <div class="form-control">
-      <label class="label py-1">
+      <label class="label py-1" for="product-select">
         <span class="label-text text-xs font-medium">Product</span>
       </label>
-      <select class="select select-bordered select-sm" bind:value={product}>
+      <select id="product-select" class="select select-bordered select-sm" bind:value={product}>
         <option value="MIS">MIS (Intraday)</option>
         <option value="CNC">CNC (Delivery)</option>
         <option value="NRML">NRML (Normal)</option>
@@ -270,12 +272,6 @@
     <div class="alert alert-info py-2">
       <div class="text-xs">
         <div><strong>Order Value:</strong> ₹{orderValue.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</div>
-        <div>
-          <strong>Side:</strong>
-          {side} • <strong>Type:</strong>
-          {orderType} • <strong>Product:</strong>
-          {product}
-        </div>
       </div>
     </div>
 
@@ -301,19 +297,6 @@
       {/if}
     </button>
   </form>
-
-  <!-- Risk Warning -->
-  <div class="alert alert-warning py-2">
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.232 15.5c-.77.833.192 2.5 1.732 2.5z"
-      ></path>
-    </svg>
-    <span class="text-xs">Review order details before submission. Trading involves risk.</span>
-  </div>
 </div>
 
 <style>
