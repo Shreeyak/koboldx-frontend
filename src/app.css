@@ -1,55 +1,55 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* daisyUI plugin for Tailwind v4 */
 @plugin "daisyui";
 
 /* Custom theme configuration */
 @theme {
-	/* Dark theme configuration for daisyUI */
-	--color-base-100: oklch(0.15 0.01 240);
-	--color-base-200: oklch(0.12 0.01 240);
-	--color-base-300: oklch(0.09 0.01 240);
+  /* Dark theme configuration for daisyUI */
+  --color-base-100: oklch(0.15 0.01 240);
+  --color-base-200: oklch(0.12 0.01 240);
+  --color-base-300: oklch(0.09 0.01 240);
 }
 
 /* Global styles */
 :root {
-	font-family: Lato, Avenir, system-ui, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
-	color-scheme: dark;
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-text-size-adjust: 100%;
+  font-family: Lato, Avenir, system-ui, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Custom component styles using @apply */
 .card {
-	@apply bg-base-100 shadow-sm;
+  @apply bg-base-100 shadow-sm;
 }
 
 .card-title {
-	@apply font-semibold text-base-content;
+  @apply font-semibold text-base-content;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-	.btm-nav {
-		@apply flex justify-center gap-4;
-	}
+  .btm-nav {
+    @apply flex justify-center gap-4;
+  }
 }
 
 /* Smooth transitions for sidebar toggles */
 .transition-all {
-	transition:
-		width 0.3s ease-in-out,
-		opacity 0.3s ease-in-out;
+  transition:
+    width 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
 }
 
 body {
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
-	font-family: 'Lato', sans-serif;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: "Lato", sans-serif;
 }

@@ -90,13 +90,18 @@
   };
 </script>
 
-<div class="h-full flex flex-col bg-base-200">
+<div class="flex h-full flex-col bg-base-200">
   <!-- Header with interval controls -->
-  <div class="p-4 border-b border-base-300">
-    <div class="flex items-center justify-between mb-3">
+  <div class="border-b border-base-300 p-4">
+    <div class="mb-3 flex items-center justify-between">
       <h2 class="text-lg font-semibold">Charts</h2>
-      <button class="btn btn-ghost btn-sm" onclick={() => generateMockData()} title="Refresh charts">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button
+        class="btn btn-ghost btn-sm"
+        onclick={() => generateMockData()}
+        title="Refresh charts"
+        aria-label="Refresh charts"
+      >
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -104,7 +109,6 @@
             d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
           ></path>
         </svg>
-        aria-label="Refresh charts"
       </button>
     </div>
 
@@ -119,15 +123,15 @@
   </div>
 
   <!-- Charts Container -->
-  <div class="flex-1 flex flex-col overflow-hidden">
+  <div class="flex flex-1 flex-col overflow-hidden">
     <!-- Underlying Chart -->
     <div class="flex-1 border-b border-base-300">
-      <div class="h-full flex flex-col">
+      <div class="flex h-full flex-col">
         <!-- Chart Header -->
-        <div class="px-4 py-2 bg-base-100 border-b border-base-300">
+        <div class="border-b border-base-300 bg-base-100 px-4 py-2">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="font-semibold text-sm">{underlyingSymbol}</h3>
+              <h3 class="text-sm font-semibold">{underlyingSymbol}</h3>
               <p class="text-xs text-base-content/60">Underlying • {currentInterval}</p>
             </div>
             <div class="text-right">
@@ -151,12 +155,12 @@
 
     <!-- Option Chart -->
     <div class="flex-1">
-      <div class="h-full flex flex-col">
+      <div class="flex h-full flex-col">
         <!-- Chart Header -->
-        <div class="px-4 py-2 bg-base-100 border-b border-base-300">
+        <div class="border-b border-base-300 bg-base-100 px-4 py-2">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="font-semibold text-sm">
+              <h3 class="text-sm font-semibold">
                 {optionSymbol || "Select Option"}
               </h3>
               <p class="text-xs text-base-content/60">
@@ -169,7 +173,10 @@
                 <div class="text-xs text-error">-8.75 (-5.52%)</div>
               </div>
             {:else}
-              <button class="btn btn-xs btn-primary" onclick={() => selectOption("NIFTY25AUG24400CE")}>
+              <button
+                class="btn btn-xs btn-primary"
+                onclick={() => selectOption("NIFTY25AUG24400CE")}
+              >
                 Select Option
               </button>
             {/if}
@@ -187,9 +194,14 @@
             />
           {:else}
             <!-- Empty state -->
-            <div class="h-full flex items-center justify-center bg-base-100">
+            <div class="flex h-full items-center justify-center bg-base-100">
               <div class="text-center text-base-content/60">
-                <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  class="mx-auto mb-2 h-12 w-12 opacity-50"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -198,7 +210,7 @@
                   ></path>
                 </svg>
                 <p class="text-sm">Select an option to view chart</p>
-                <p class="text-xs mt-1">Choose from option chain</p>
+                <p class="mt-1 text-xs">Choose from option chain</p>
               </div>
             </div>
           {/if}
@@ -208,24 +220,24 @@
   </div>
 
   <!-- Quick Actions Footer -->
-  <div class="p-4 border-t border-base-300 bg-base-100">
+  <div class="border-t border-base-300 bg-base-100 p-4">
     <div class="flex gap-2">
       <button
-        class="btn btn-xs btn-outline flex-1"
+        class="btn flex-1 btn-outline btn-xs"
         onclick={() => handleCurrentIntervalChange("3m")}
         class:btn-active={currentInterval === "3m"}
       >
         3m
       </button>
       <button
-        class="btn btn-xs btn-outline flex-1"
+        class="btn flex-1 btn-outline btn-xs"
         onclick={() => handleCurrentIntervalChange("5m")}
         class:btn-active={currentInterval === "5m"}
       >
         5m
       </button>
       <button
-        class="btn btn-xs btn-outline flex-1"
+        class="btn flex-1 btn-outline btn-xs"
         onclick={() => handleCurrentIntervalChange("15m")}
         class:btn-active={currentInterval === "15m"}
       >

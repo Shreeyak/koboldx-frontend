@@ -37,16 +37,24 @@
       // Mock call data
       const callLtp = Math.max(
         0.05,
-        isAtm ? 150 + Math.random() * 50 : Math.max(0.05, 200 - distanceFromAtm * 30 + Math.random() * 20)
+        isAtm
+          ? 150 + Math.random() * 50
+          : Math.max(0.05, 200 - distanceFromAtm * 30 + Math.random() * 20)
       );
-      const callOi = Math.floor((isAtm ? 800000 : 400000 - distanceFromAtm * 50000) + Math.random() * 200000);
+      const callOi = Math.floor(
+        (isAtm ? 800000 : 400000 - distanceFromAtm * 50000) + Math.random() * 200000
+      );
 
       // Mock put data
       const putLtp = Math.max(
         0.05,
-        isAtm ? 140 + Math.random() * 50 : Math.max(0.05, 180 - distanceFromAtm * 25 + Math.random() * 20)
+        isAtm
+          ? 140 + Math.random() * 50
+          : Math.max(0.05, 180 - distanceFromAtm * 25 + Math.random() * 20)
       );
-      const putOi = Math.floor((isAtm ? 750000 : 350000 - distanceFromAtm * 40000) + Math.random() * 180000);
+      const putOi = Math.floor(
+        (isAtm ? 750000 : 350000 - distanceFromAtm * 40000) + Math.random() * 180000
+      );
 
       return {
         strike,
@@ -132,7 +140,7 @@
   };
 </script>
 
-<div class="h-full flex flex-col">
+<div class="flex h-full flex-col">
   <!-- Header with controls -->
   <div class="mb-4 space-y-3">
     <!-- Underlying info -->
@@ -145,9 +153,9 @@
       </div>
       <button class="btn btn-ghost btn-sm" onclick={refreshChain} disabled={loading}>
         {#if loading}
-          <span class="loading loading-spinner loading-xs"></span>
+          <span class="loading loading-xs loading-spinner"></span>
         {:else}
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -164,7 +172,7 @@
     <div class="flex gap-2 overflow-x-auto">
       {#each optionChain.expiries as expiry}
         <button
-          class="btn btn-sm btn-outline whitespace-nowrap"
+          class="btn whitespace-nowrap btn-outline btn-sm"
           class:btn-active={selectedExpiry === expiry}
           onclick={() => handleExpiryChange(expiry)}
         >
@@ -184,25 +192,25 @@
       <div class="space-y-2">
         {#each Array(10) as _}
           <div class="animate-pulse">
-            <div class="h-12 bg-base-300 rounded"></div>
+            <div class="h-12 rounded bg-base-300"></div>
           </div>
         {/each}
       </div>
     {:else}
       <div class="overflow-x-auto">
-        <table class="table table-xs table-pin-rows">
+        <table class="table-pin-rows table table-xs">
           <thead>
             <tr class="bg-base-200">
-              <th colspan="4" class="text-center border-r border-base-300">CALLS</th>
-              <th class="text-center bg-primary/20">STRIKE</th>
-              <th colspan="4" class="text-center border-l border-base-300">PUTS</th>
+              <th colspan="4" class="border-r border-base-300 text-center">CALLS</th>
+              <th class="bg-primary/20 text-center">STRIKE</th>
+              <th colspan="4" class="border-l border-base-300 text-center">PUTS</th>
             </tr>
             <tr class="bg-base-200 text-xs">
               <th class="text-right">OI</th>
               <th class="text-right">Chg</th>
               <th class="text-right">LTP</th>
               <th class="text-center">Buy</th>
-              <th class="text-center bg-primary/10 font-bold">Strike</th>
+              <th class="bg-primary/10 text-center font-bold">Strike</th>
               <th class="text-center">Buy</th>
               <th class="text-left">LTP</th>
               <th class="text-left">Chg</th>
@@ -212,7 +220,9 @@
           <tbody>
             {#each optionChain.rows as row (row.strike)}
               {@const isAtm = isAtmStrike(row.strike)}
-              <tr class="hover:bg-base-200/50 text-xs {isAtm ? 'bg-primary/5 border-primary/20' : ''}">
+              <tr
+                class="text-xs hover:bg-base-200/50 {isAtm ? 'border-primary/20 bg-primary/5' : ''}"
+              >
                 <!-- Call OI -->
                 <td class="text-right font-mono">
                   {formatLargeNumber(row.call.oi)}
@@ -230,19 +240,29 @@
 
                 <!-- Call Buy Button -->
                 <td class="text-center">
-                  <button class="btn btn-xs btn-success btn-outline" onclick={() => selectOption(row.strike, "call")}>
+                  <button
+                    class="btn btn-outline btn-xs btn-success"
+                    onclick={() => selectOption(row.strike, "call")}
+                  >
                     B
                   </button>
                 </td>
 
                 <!-- Strike Price -->
-                <td class="text-center font-bold bg-base-200 {isAtm ? 'bg-primary/20 text-primary' : ''}">
+                <td
+                  class="bg-base-200 text-center font-bold {isAtm
+                    ? 'bg-primary/20 text-primary'
+                    : ''}"
+                >
                   {row.strike}
                 </td>
 
                 <!-- Put Buy Button -->
                 <td class="text-center">
-                  <button class="btn btn-xs btn-success btn-outline" onclick={() => selectOption(row.strike, "put")}>
+                  <button
+                    class="btn btn-outline btn-xs btn-success"
+                    onclick={() => selectOption(row.strike, "put")}
+                  >
                     B
                   </button>
                 </td>
@@ -270,7 +290,7 @@
   </div>
 
   <!-- Footer with stats -->
-  <div class="mt-4 p-3 bg-base-200 rounded-lg">
+  <div class="mt-4 rounded-lg bg-base-200 p-3">
     <div class="grid grid-cols-3 gap-4 text-center text-xs">
       <div>
         <div class="font-semibold">Total Call OI</div>
@@ -299,7 +319,7 @@
 
   {#if selectedOption}
     <div class="mt-2 alert alert-info py-2">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"

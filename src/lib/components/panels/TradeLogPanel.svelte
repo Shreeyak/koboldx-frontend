@@ -233,11 +233,11 @@
   };
 </script>
 
-<div class="h-full flex flex-col">
+<div class="flex h-full flex-col">
   <!-- Header with stats and controls -->
   <div class="mb-4">
     <!-- Summary stats -->
-    <div class="stats stats-horizontal shadow-sm bg-base-200 mb-3">
+    <div class="stats mb-3 stats-horizontal bg-base-200 shadow-sm">
       <div class="stat py-2">
         <div class="stat-title text-xs">Total P&L</div>
         <div class="stat-value text-sm {getPnLColor(totalPnL)}">
@@ -259,9 +259,9 @@
       <h3 class="font-semibold">Active Trades</h3>
       <button class="btn btn-ghost btn-sm" onclick={refreshTrades} disabled={loading}>
         {#if loading}
-          <span class="loading loading-spinner loading-xs"></span>
+          <span class="loading loading-xs loading-spinner"></span>
         {:else}
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -276,20 +276,25 @@
   </div>
 
   <!-- Trades list -->
-  <div class="flex-1 overflow-auto space-y-2">
+  <div class="flex-1 space-y-2 overflow-auto">
     {#if loading && trades.length === 0}
       <!-- Loading skeleton -->
       <div class="space-y-2">
         {#each Array(5) as _}
           <div class="animate-pulse">
-            <div class="h-16 bg-base-300 rounded-lg"></div>
+            <div class="h-16 rounded-lg bg-base-300"></div>
           </div>
         {/each}
       </div>
     {:else if trades.length === 0}
       <!-- Empty state -->
-      <div class="text-center py-8 text-base-content/60">
-        <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="py-8 text-center text-base-content/60">
+        <svg
+          class="mx-auto mb-2 h-12 w-12 opacity-50"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -298,18 +303,18 @@
           ></path>
         </svg>
         <p class="text-sm">No trades found</p>
-        <p class="text-xs mt-1">Trades will appear here once you place orders</p>
+        <p class="mt-1 text-xs">Trades will appear here once you place orders</p>
       </div>
     {:else}
       {#each trades as trade (trade.id)}
-        <div class="card card-compact bg-base-100 border border-base-300 shadow-sm">
+        <div class="card-compact card border border-base-300 bg-base-100 shadow-sm">
           <!-- Trade summary -->
           <div class="card-body p-3">
             <div class="flex items-center justify-between">
               <!-- Trade info -->
               <div class="flex-1">
-                <div class="flex items-center gap-2 mb-1">
-                  <h4 class="font-semibold text-sm">{trade.id}</h4>
+                <div class="mb-1 flex items-center gap-2">
+                  <h4 class="text-sm font-semibold">{trade.id}</h4>
                   <span class="badge {getStatusBadge(trade.status)} badge-xs">
                     {trade.status}
                   </span>
@@ -337,17 +342,17 @@
               </div>
 
               <!-- Actions -->
-              <div class="flex items-center gap-1 ml-3">
+              <div class="ml-3 flex items-center gap-1">
                 {#if trade.status === "OPEN"}
                   <button
-                    class="btn btn-xs btn-outline btn-warning"
+                    class="btn btn-outline btn-xs btn-warning"
                     onclick={() => modifyTrade(trade.id)}
                     disabled={loading}
                   >
                     Modify
                   </button>
                   <button
-                    class="btn btn-xs btn-outline btn-error"
+                    class="btn btn-outline btn-xs btn-error"
                     onclick={() => closeTrade(trade.id)}
                     disabled={loading}
                   >
@@ -355,18 +360,23 @@
                   </button>
                 {/if}
                 <button
-                  class="btn btn-xs btn-ghost"
+                  class="btn btn-ghost btn-xs"
                   onclick={() => toggleExpand(trade.id)}
                   aria-label="Toggle details for trade"
                 >
                   <svg
-                    class="w-3 h-3 transition-transform"
+                    class="h-3 w-3 transition-transform"
                     class:rotate-180={expandedTrades.has(trade.id)}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
                   </svg>
                 </button>
               </div>
@@ -375,12 +385,12 @@
 
           <!-- Expanded details -->
           {#if expandedTrades.has(trade.id)}
-            <div class="border-t border-base-300 bg-base-50">
+            <div class="bg-base-50 border-t border-base-300">
               <div class="p-3">
-                <h5 class="font-medium text-sm mb-2">Trade Legs ({trade.legs.length})</h5>
+                <h5 class="mb-2 text-sm font-medium">Trade Legs ({trade.legs.length})</h5>
                 <div class="space-y-2">
                   {#each trade.legs as leg (leg.id)}
-                    <div class="flex items-center justify-between p-2 bg-base-100 rounded border">
+                    <div class="flex items-center justify-between rounded border bg-base-100 p-2">
                       <div class="flex-1">
                         <div class="flex items-center gap-2">
                           <span
@@ -392,7 +402,7 @@
                           </span>
                           <span class="font-mono text-xs">{leg.symbol}</span>
                         </div>
-                        <div class="text-xs text-base-content/70 mt-1">
+                        <div class="mt-1 text-xs text-base-content/70">
                           Qty: {leg.quantity} • Avg: ₹{leg.average_price.toFixed(2)}
                         </div>
                       </div>
@@ -412,12 +422,12 @@
                 <div class="mt-3 grid grid-cols-2 gap-4 text-xs">
                   <div>
                     <span class="text-base-content/70">Entry:</span>
-                    <span class="font-mono ml-1">{formatTime(trade.entry_time)}</span>
+                    <span class="ml-1 font-mono">{formatTime(trade.entry_time)}</span>
                   </div>
                   {#if trade.exit_time}
                     <div>
                       <span class="text-base-content/70">Exit:</span>
-                      <span class="font-mono ml-1">{formatTime(trade.exit_time)}</span>
+                      <span class="ml-1 font-mono">{formatTime(trade.exit_time)}</span>
                     </div>
                   {/if}
                   <div>

@@ -62,18 +62,25 @@
   };
 </script>
 
-<header class="navbar bg-base-200 border-b border-base-300 px-4 h-[60px] min-h-[60px]">
+<header class="navbar h-[60px] min-h-[60px] border-b border-base-300 bg-base-200 px-4">
   <!-- Left side - Logo and sidebar toggle -->
   <div class="navbar-start">
     <div class="flex items-center gap-3">
       <!-- Mobile sidebar toggles -->
       <div class="dropdown lg:hidden">
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        <div tabindex="0" role="button" class="btn btn-circle btn-ghost">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
           </svg>
         </div>
-        <ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <ul
+          class="dropdown-content menu z-[1] mt-3 w-52 menu-sm rounded-box bg-base-100 p-2 shadow"
+        >
           <li><button onclick={onToggleLeftSidebar}>Instruments</button></li>
           <li><button onclick={onToggleRightSidebar}>Charts</button></li>
         </ul>
@@ -81,13 +88,13 @@
 
       <!-- Desktop sidebar toggles -->
       <button
-        class="btn btn-ghost btn-sm hidden lg:flex"
+        class="btn hidden btn-ghost btn-sm lg:flex"
         onclick={onToggleLeftSidebar}
         class:btn-active={leftSidebarOpen}
         title="Toggle instruments panel"
         aria-label="Toggle instruments panel"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -99,10 +106,10 @@
 
       <!-- Logo -->
       <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-          <span class="text-primary-content font-bold text-sm">KX</span>
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+          <span class="text-sm font-bold text-primary-content">KX</span>
         </div>
-        <h1 class="text-xl font-bold text-base-content hidden sm:block">KoboldX</h1>
+        <h1 class="hidden text-xl font-bold text-base-content sm:block">KoboldX</h1>
       </div>
     </div>
   </div>
@@ -139,24 +146,28 @@
       <div class="flex items-center gap-2">
         <div
           class="
-          w-2 h-2 rounded-full
-          {wsState.connected ? 'bg-success' : wsState.connecting ? 'bg-warning animate-pulse' : 'bg-error'}
+          h-2 w-2 rounded-full
+          {wsState.connected
+            ? 'bg-success'
+            : wsState.connecting
+              ? 'animate-pulse bg-warning'
+              : 'bg-error'}
         "
         ></div>
-        <span class="text-xs text-base-content/70 hidden sm:inline">
+        <span class="hidden text-xs text-base-content/70 sm:inline">
           {wsState.connected ? "Connected" : wsState.connecting ? "Connecting..." : "Disconnected"}
         </span>
       </div>
 
       <!-- Charts sidebar toggle -->
       <button
-        class="btn btn-ghost btn-sm hidden lg:flex"
+        class="btn hidden btn-ghost btn-sm lg:flex"
         onclick={onToggleRightSidebar}
         class:btn-active={rightSidebarOpen}
         title="Toggle charts panel"
         aria-label="Toggle charts panel"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -168,19 +179,23 @@
 
       <!-- Settings Dropdown -->
       <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle btn-sm">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div tabindex="0" role="button" class="btn btn-circle btn-ghost btn-sm">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
               d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
             ></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
             ></path>
           </svg>
         </div>
-        <ul class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+        <ul class="dropdown-content menu z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
           <li><a href="#settings">Settings</a></li>
           <li><a href="#theme">Theme</a></li>
           <li><a href="#help">Help</a></li>

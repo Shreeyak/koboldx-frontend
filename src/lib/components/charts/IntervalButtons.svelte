@@ -93,7 +93,7 @@
   <!-- Intraday intervals -->
   {#if groupedIntervals && groupedIntervals.intraday && groupedIntervals.intraday.length > 0}
     <div class="flex flex-wrap gap-1">
-      <span class="text-xs text-base-content/70 self-center mr-2">Intraday:</span>
+      <span class="mr-2 self-center text-xs text-base-content/70">Intraday:</span>
       {#each groupedIntervals?.intraday ?? [] as interval}
         <button
           class={getButtonClass(interval)}
@@ -117,7 +117,7 @@
         >
           {formatInterval(interval)}
           {#if current === interval}
-            <svg class="w-2 h-2 ml-1" fill="currentColor" viewBox="0 0 8 8">
+            <svg class="ml-1 h-2 w-2" fill="currentColor" viewBox="0 0 8 8">
               <circle cx="4" cy="4" r="2" />
             </svg>
           {/if}
@@ -129,7 +129,7 @@
   <!-- Daily/Weekly intervals -->
   {#if groupedIntervals?.daily?.length > 0}
     <div class="flex flex-wrap gap-1">
-      <span class="text-xs text-base-content/70 self-center mr-2">Daily:</span>
+      <span class="mr-2 self-center text-xs text-base-content/70">Daily:</span>
       {#each groupedIntervals?.daily ?? [] as interval}
         <button
           class={getButtonClass(interval)}
@@ -153,7 +153,7 @@
         >
           {formatInterval(interval)}
           {#if current === interval}
-            <svg class="w-2 h-2 ml-1" fill="currentColor" viewBox="0 0 8 8">
+            <svg class="ml-1 h-2 w-2" fill="currentColor" viewBox="0 0 8 8">
               <circle cx="4" cy="4" r="2" />
             </svg>
           {/if}
@@ -188,7 +188,7 @@
         >
           {formatInterval(interval)}
           {#if current === interval}
-            <svg class="w-2 h-2 ml-1" fill="currentColor" viewBox="0 0 8 8">
+            <svg class="ml-1 h-2 w-2" fill="currentColor" viewBox="0 0 8 8">
               <circle cx="4" cy="4" r="2" />
             </svg>
           {/if}
