@@ -1,7 +1,7 @@
 <script lang="ts">
-  import '../app.css';
-  import favicon from '$lib/assets/favicon.svg';
-  
+  import "../app.css";
+  import favicon from "$lib/assets/favicon.svg";
+
   // Layout components (will be created)
   import Header from "$lib/components/layout/Header.svelte";
   import LeftSidebar from "$lib/components/layout/LeftSidebar.svelte";
@@ -52,16 +52,16 @@
     <div
       class="
       {leftSidebarOpen ? 'w-80' : 'w-0'} 
+      border-r border-base-300 bg-base-200
       transition-all duration-300 ease-in-out
-      bg-base-200 border-r border-base-300
-      {leftSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+      {leftSidebarOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}
     "
     >
       <LeftSidebar />
     </div>
 
     <!-- Center Panel - This is where page content will be rendered -->
-    <div class="flex-1 flex flex-col overflow-auto">
+    <div class="flex flex-1 flex-col overflow-auto">
       {@render children?.()}
     </div>
 
@@ -69,9 +69,9 @@
     <div
       class="
       {rightSidebarOpen ? 'w-96' : 'w-0'} 
+      border-l border-base-300 bg-base-200
       transition-all duration-300 ease-in-out
-      bg-base-200 border-l border-base-300
-      {rightSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+      {rightSidebarOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}
     "
     >
       <RightSidebar />
@@ -87,8 +87,13 @@
       class:active={leftSidebarOpen}
       onclick={() => (leftSidebarOpen = !leftSidebarOpen)}
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
       </svg>
       Instruments
     </button>
@@ -98,7 +103,7 @@
       class:active={rightSidebarOpen}
       onclick={() => (rightSidebarOpen = !rightSidebarOpen)}
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"

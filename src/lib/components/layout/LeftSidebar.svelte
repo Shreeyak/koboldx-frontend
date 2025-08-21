@@ -3,16 +3,86 @@
 
   // Mock instruments data - will be connected to stores later
   let instruments = $state<Instrument[]>([
-    { symbol: "NIFTY", token: "256265", exchange: "NSE", lot_size: 50, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "BANKNIFTY", token: "260105", exchange: "NSE", lot_size: 25, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "FINNIFTY", token: "257801", exchange: "NSE", lot_size: 40, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "RELIANCE", token: "738561", exchange: "NSE", lot_size: 1, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "TCS", token: "2953217", exchange: "NSE", lot_size: 1, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "HDFCBANK", token: "341249", exchange: "NSE", lot_size: 1, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "INFY", token: "408065", exchange: "NSE", lot_size: 1, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "ICICIBANK", token: "1270529", exchange: "NSE", lot_size: 1, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "HINDUNILVR", token: "356865", exchange: "NSE", lot_size: 1, tick_size: 0.05, instrument_type: "EQ" },
-    { symbol: "ITC", token: "424961", exchange: "NSE", lot_size: 1, tick_size: 0.05, instrument_type: "EQ" },
+    {
+      symbol: "NIFTY",
+      token: "256265",
+      exchange: "NSE",
+      lot_size: 50,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "BANKNIFTY",
+      token: "260105",
+      exchange: "NSE",
+      lot_size: 25,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "FINNIFTY",
+      token: "257801",
+      exchange: "NSE",
+      lot_size: 40,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "RELIANCE",
+      token: "738561",
+      exchange: "NSE",
+      lot_size: 1,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "TCS",
+      token: "2953217",
+      exchange: "NSE",
+      lot_size: 1,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "HDFCBANK",
+      token: "341249",
+      exchange: "NSE",
+      lot_size: 1,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "INFY",
+      token: "408065",
+      exchange: "NSE",
+      lot_size: 1,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "ICICIBANK",
+      token: "1270529",
+      exchange: "NSE",
+      lot_size: 1,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "HINDUNILVR",
+      token: "356865",
+      exchange: "NSE",
+      lot_size: 1,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
+    {
+      symbol: "ITC",
+      token: "424961",
+      exchange: "NSE",
+      lot_size: 1,
+      tick_size: 0.05,
+      instrument_type: "EQ",
+    },
   ]);
 
   let searchQuery = $state("");
@@ -23,7 +93,9 @@
   let filteredInstruments = $derived(
     searchQuery.trim() === ""
       ? instruments
-      : instruments.filter((instrument) => instrument.symbol.toLowerCase().includes(searchQuery.toLowerCase()))
+      : instruments.filter((instrument) =>
+          instrument.symbol.toLowerCase().includes(searchQuery.toLowerCase())
+        )
   );
 
   // Handle instrument selection
@@ -79,30 +151,38 @@
   };
 </script>
 
-<div class="h-full flex flex-col bg-base-200">
+<div class="flex h-full flex-col bg-base-200">
   <!-- Header -->
-  <div class="p-4 border-b border-base-300">
-    <h2 class="text-lg font-semibold mb-3">Instruments</h2>
+  <div class="border-b border-base-300 p-4">
+    <h2 class="mb-3 text-lg font-semibold">Instruments</h2>
 
     <!-- Search Input -->
     <div class="relative">
       <input
         type="text"
         placeholder="Search instruments..."
-        class="input input-bordered input-sm w-full pr-8"
+        class="input-bordered input input-sm w-full pr-8"
         value={searchQuery}
         oninput={handleSearch}
       />
       {#if searchQuery}
-        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 btn btn-ghost btn-xs" onclick={clearSearch}>
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+        <button
+          class="btn absolute top-1/2 right-2 -translate-y-1/2 transform btn-ghost btn-xs"
+          onclick={clearSearch}
           aria-label="Clear search"
+        >
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
         </button>
       {:else}
         <svg
-          class="absolute right-2 top-1/2 transform -translate-y-1/2 w-3 h-3 text-base-content/50"
+          class="absolute top-1/2 right-2 h-3 w-3 -translate-y-1/2 transform text-base-content/50"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -122,17 +202,22 @@
   <div class="flex-1 overflow-auto">
     {#if loading}
       <!-- Loading skeleton -->
-      <div class="p-4 space-y-2">
+      <div class="space-y-2 p-4">
         {#each Array(8) as _}
           <div class="animate-pulse">
-            <div class="h-12 bg-base-300 rounded-lg"></div>
+            <div class="h-12 rounded-lg bg-base-300"></div>
           </div>
         {/each}
       </div>
     {:else if filteredInstruments.length === 0}
       <!-- Empty state -->
       <div class="p-4 text-center text-base-content/60">
-        <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          class="mx-auto mb-2 h-12 w-12 opacity-50"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -142,7 +227,7 @@
         </svg>
         <p class="text-sm">No instruments found</p>
         {#if searchQuery}
-          <p class="text-xs mt-1">Try a different search term</p>
+          <p class="mt-1 text-xs">Try a different search term</p>
         {/if}
       </div>
     {:else}
@@ -154,17 +239,19 @@
 
           <button
             class="
-              w-full p-3 mb-1 rounded-lg text-left transition-colors
+              mb-1 w-full rounded-lg p-3 text-left transition-colors
               hover:bg-base-300 focus:bg-base-300 focus:outline-none
-              {selectedInstrument === instrument.symbol ? 'bg-primary/20 border border-primary/40' : 'bg-base-100'}
+              {selectedInstrument === instrument.symbol
+              ? 'border border-primary/40 bg-primary/20'
+              : 'bg-base-100'}
             "
             onclick={() => selectInstrument(instrument.symbol)}
           >
             <div class="flex items-center justify-between">
               <!-- Symbol and exchange -->
-              <div class="flex-1 min-w-0">
+              <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-2">
-                  <h3 class="font-semibold text-sm truncate">{instrument.symbol}</h3>
+                  <h3 class="truncate text-sm font-semibold">{instrument.symbol}</h3>
                   <span class="badge badge-outline badge-xs">{instrument.exchange}</span>
                 </div>
                 {#if instrument.lot_size > 1}
@@ -174,13 +261,16 @@
 
               <!-- Price and change -->
               <div class="text-right">
-                <div class="font-semibold text-sm">
-                  ₹{price.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                <div class="text-sm font-semibold">
+                  ₹{price.toLocaleString("en-IN", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </div>
                 <div class="text-xs {change >= 0 ? 'text-success' : 'text-error'}">
-                  {change >= 0 ? "+" : ""}{change.toFixed(2)} ({changePercent >= 0 ? "+" : ""}{changePercent.toFixed(
-                    2
-                  )}%)
+                  {change >= 0 ? "+" : ""}{change.toFixed(2)} ({changePercent >= 0
+                    ? "+"
+                    : ""}{changePercent.toFixed(2)}%)
                 </div>
               </div>
             </div>
@@ -191,9 +281,9 @@
   </div>
 
   <!-- Footer with refresh button -->
-  <div class="p-4 border-t border-base-300">
+  <div class="border-t border-base-300 p-4">
     <button
-      class="btn btn-sm btn-ghost w-full"
+      class="btn w-full btn-ghost btn-sm"
       onclick={() => {
         loading = true;
         // Simulate API call
@@ -202,10 +292,10 @@
       disabled={loading}
     >
       {#if loading}
-        <span class="loading loading-spinner loading-xs"></span>
+        <span class="loading loading-xs loading-spinner"></span>
         Refreshing...
       {:else}
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"

@@ -145,12 +145,12 @@
   });
 </script>
 
-<div class="w-full h-full relative">
+<div class="relative h-full w-full">
   {#if loading}
     <!-- Loading overlay -->
-    <div class="absolute inset-0 flex items-center justify-center bg-base-100/80 z-10">
+    <div class="absolute inset-0 z-10 flex items-center justify-center bg-base-100/80">
       <div class="flex flex-col items-center gap-2">
-        <span class="loading loading-spinner loading-md"></span>
+        <span class="loading loading-md loading-spinner"></span>
         <span class="text-sm text-base-content/70">Loading chart...</span>
       </div>
     </div>
@@ -159,14 +159,19 @@
   <!-- Chart container -->
   <div
     bind:this={chartContainer}
-    class="w-full bg-base-100 rounded border border-base-300 chart-container"
+    class="chart-container w-full rounded border border-base-300 bg-base-100"
     style="height: {height}px;"
   >
     {#if !chartContainer || data.length === 0}
       <!-- Empty state -->
-      <div class="w-full h-full flex items-center justify-center text-base-content/60">
+      <div class="flex h-full w-full items-center justify-center text-base-content/60">
         <div class="text-center">
-          <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            class="mx-auto mb-2 h-12 w-12 opacity-50"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -175,7 +180,7 @@
             ></path>
           </svg>
           <p class="text-sm">No chart data available</p>
-          <p class="text-xs mt-1">Data will appear when available</p>
+          <p class="mt-1 text-xs">Data will appear when available</p>
         </div>
       </div>
     {/if}
@@ -183,7 +188,7 @@
 
   <!-- Chart info overlay -->
   {#if title && data.length > 0}
-    <div class="absolute top-2 left-2 bg-base-100/90 rounded px-2 py-1 text-xs font-medium">
+    <div class="absolute top-2 left-2 rounded bg-base-100/90 px-2 py-1 text-xs font-medium">
       {title}
     </div>
   {/if}

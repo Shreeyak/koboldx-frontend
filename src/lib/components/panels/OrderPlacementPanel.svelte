@@ -102,7 +102,8 @@
 
   // Calculate order value
   let orderValue = $derived.by(() => {
-    const effectivePrice = orderType === "MARKET" ? (side === "BUY" ? askPrice : bidPrice) : price || currentPrice;
+    const effectivePrice =
+      orderType === "MARKET" ? (side === "BUY" ? askPrice : bidPrice) : price || currentPrice;
     return quantity * effectivePrice;
   });
 
@@ -115,21 +116,26 @@
   <!-- Quick Actions -->
   <div class="flex gap-2">
     <button
-      class="btn btn-success flex-1"
+      class="btn flex-1 btn-success"
       class:btn-outline={side !== "BUY" || orderType !== "MARKET"}
       onclick={quickBuy}
     >
-      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+      <svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        ></path>
       </svg>
       Quick Buy
     </button>
     <button
-      class="btn btn-error flex-1"
+      class="btn flex-1 btn-error"
       class:btn-outline={side !== "SELL" || orderType !== "MARKET"}
       onclick={quickSell}
     >
-      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
       </svg>
       Quick Sell
@@ -137,14 +143,18 @@
   </div>
 
   <!-- Current Market Data -->
-  <div class="stats stats-horizontal shadow-sm bg-base-200">
+  <div class="stats stats-horizontal bg-base-200 shadow-sm">
     <div class="stat py-2">
       <div class="stat-title text-xs">LTP</div>
-      <div class="stat-value text-sm">₹{currentPrice.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</div>
+      <div class="stat-value text-sm">
+        ₹{currentPrice.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+      </div>
     </div>
     <div class="stat py-2">
       <div class="stat-title text-xs">Bid</div>
-      <div class="stat-value text-sm text-error">₹{bidPrice.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</div>
+      <div class="stat-value text-sm text-error">
+        ₹{bidPrice.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+      </div>
     </div>
     <div class="stat py-2">
       <div class="stat-title text-xs">Ask</div>
@@ -161,7 +171,13 @@
       <label class="label py-1" for="symbol-input">
         <span class="label-text text-xs font-medium">Symbol</span>
       </label>
-      <input id="symbol-input" type="text" class="input input-bordered input-sm bg-base-200" value={selectedSymbol} readonly />
+      <input
+        id="symbol-input"
+        type="text"
+        class="input-bordered input input-sm bg-base-200"
+        value={selectedSymbol}
+        readonly
+      />
     </div>
 
     <!-- Side and Order Type -->
@@ -170,7 +186,7 @@
         <label class="label py-1" for="side-select">
           <span class="label-text text-xs font-medium">Side</span>
         </label>
-        <select id="side-select" class="select select-bordered select-sm" bind:value={side}>
+        <select id="side-select" class="select-bordered select select-sm" bind:value={side}>
           <option value="BUY">BUY</option>
           <option value="SELL">SELL</option>
         </select>
@@ -180,7 +196,11 @@
         <label class="label py-1" for="order-type-select">
           <span class="label-text text-xs font-medium">Type</span>
         </label>
-        <select id="order-type-select" class="select select-bordered select-sm" bind:value={orderType}>
+        <select
+          id="order-type-select"
+          class="select-bordered select select-sm"
+          bind:value={orderType}
+        >
           <option value="MARKET">MARKET</option>
           <option value="LIMIT">LIMIT</option>
           <option value="SL">SL</option>
@@ -197,18 +217,18 @@
       <input
         id="quantity-input"
         type="number"
-        class="input input-bordered input-sm"
+        class="input-bordered input input-sm"
         bind:value={quantity}
         min="1"
         step="1"
         placeholder="Enter quantity"
       />
       <!-- Quantity presets -->
-      <div class="flex gap-1 mt-1">
+      <div class="mt-1 flex gap-1">
         {#each quantityPresets as preset}
           <button
             type="button"
-            class="btn btn-xs btn-outline"
+            class="btn btn-outline btn-xs"
             class:btn-active={quantity === preset}
             onclick={() => (quantity = preset)}
           >
@@ -223,13 +243,17 @@
       <div class="form-control">
         <label class="label py-1">
           <span class="label-text text-xs font-medium">Price</span>
-          <button type="button" class="label-text-alt text-xs link link-primary" onclick={setMarketPrice}>
+          <button
+            type="button"
+            class="label-text-alt link text-xs link-primary"
+            onclick={setMarketPrice}
+          >
             Use Market
           </button>
         </label>
         <input
           type="number"
-          class="input input-bordered input-sm"
+          class="input-bordered input input-sm"
           bind:value={price}
           min="0.05"
           step="0.05"
@@ -247,7 +271,7 @@
         <input
           id="trigger-price-input"
           type="number"
-          class="input input-bordered input-sm"
+          class="input-bordered input input-sm"
           bind:value={triggerPrice}
           min="0.05"
           step="0.05"
@@ -261,7 +285,7 @@
       <label class="label py-1" for="product-select">
         <span class="label-text text-xs font-medium">Product</span>
       </label>
-      <select id="product-select" class="select select-bordered select-sm" bind:value={product}>
+      <select id="product-select" class="select-bordered select select-sm" bind:value={product}>
         <option value="MIS">MIS (Intraday)</option>
         <option value="CNC">CNC (Delivery)</option>
         <option value="NRML">NRML (Normal)</option>
@@ -271,7 +295,11 @@
     <!-- Order Summary -->
     <div class="alert alert-info py-2">
       <div class="text-xs">
-        <div><strong>Order Value:</strong> ₹{orderValue.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</div>
+        <div>
+          <strong>Order Value:</strong> ₹{orderValue.toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+          })}
+        </div>
       </div>
     </div>
 
@@ -284,11 +312,15 @@
       disabled={loading}
     >
       {#if loading}
-        <span class="loading loading-spinner loading-sm"></span>
+        <span class="loading loading-sm loading-spinner"></span>
         Placing Order...
       {:else}
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+        <svg class="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
           ></path>
         </svg>
         {side}
