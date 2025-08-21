@@ -112,25 +112,6 @@
 {/if}
 
 <style>
-  @import "tailwindcss";
-  @reference;
-
-  /* Custom styles for grid layout */
-  .card {
-    @apply bg-base-100 shadow-sm;
-  }
-
-  .card-title {
-    @apply text-base-content font-semibold;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 1024px) {
-    .btm-nav {
-      @apply flex justify-center gap-4;
-    }
-  }
-
   /* Smooth transitions for sidebar toggles */
   .transition-all {
     transition:
