@@ -1,23 +1,31 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* daisyUI plugin for Tailwind v4 */
 @plugin "daisyui";
 
+/* Custom theme configuration */
+@theme {
+	/* Dark theme configuration for daisyUI */
+	--color-base-100: oklch(0.15 0.01 240);
+	--color-base-200: oklch(0.12 0.01 240);
+	--color-base-300: oklch(0.09 0.01 240);
+}
+
 /* Global styles */
 :root {
-  font-family: Lato, Avenir, system-ui, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: Lato, Avenir, system-ui, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	color-scheme: dark;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: "Lato", sans-serif;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+	font-family: 'Lato', sans-serif;
 }
